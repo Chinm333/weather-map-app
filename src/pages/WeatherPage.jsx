@@ -99,8 +99,8 @@ const WeatherPage = () => {
                             </div>
                             <div className='tempNote'>
                                 <label>{weatherData.weather[0].description}</label>
-                                <p><i class="bi bi-droplet"></i> {weatherData.main.humidity}%</p>
-                                <p><i class="bi bi-wind"></i> {weatherData.wind.speed} {unit === 'metric' ? 'm/s' : 'mph'}</p>
+                                <p><i className="bi bi-droplet"></i> {weatherData.main.humidity}%</p>
+                                <p><i className="bi bi-wind"></i> {weatherData.wind.speed} {unit === 'metric' ? 'm/s' : 'mph'}</p>
                             </div>
                         </Col>
                     </Row>
@@ -113,7 +113,7 @@ const WeatherPage = () => {
                                         <p>{forecast.main}</p>
                                         <p>Min: {forecast.tempMin}°</p>
                                         <p>Max: {forecast.tempMax}°</p>
-                                        <p><i class="bi bi-cloud-lightning-rain"></i> {(forecast.pop * 100).toFixed(0)}%</p>
+                                        <p><i className="bi bi-cloud-lightning-rain"></i> {(forecast.pop * 100).toFixed(0)}%</p>
                                     </Col>
                                 ))}
                             </Row>
