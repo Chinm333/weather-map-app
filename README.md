@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+## ScreenShots of Application 
+![image](https://github.com/Chinm333/weather-map-app/assets/88426061/59141a28-c0cc-4f08-9fd9-a216c42a8274)
+![image](https://github.com/Chinm333/weather-map-app/assets/88426061/57ae8728-71d0-422e-9304-e307191cdab9)
+![localhost_3000_weather_lat=23 74484995796419 lon=86 43543610112238 unit=metric(Samsung Galaxy S8+)](https://github.com/Chinm333/weather-map-app/assets/88426061/c468e601-1525-4284-bcf6-a1e9ec0ad43a)
