@@ -15,8 +15,22 @@ h1 {
 }
 
 .WeatherPage {
-    padding: 20px;
-    background-color: #f8f9fa;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.WeatherPage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: -1;
 }
 
 .current-weather {
@@ -76,7 +90,7 @@ label {
     padding-bottom: 1rem;
 }
 
-p{
+p {
     color: #000 !important;
     text-align: center;
     font-size: 13px;
@@ -86,6 +100,7 @@ p{
 }
 
 .date {
+    white-space: nowrap;
     color: #000 !important;
     font-size: 18px;
     font-style: normal;
@@ -100,6 +115,7 @@ p{
 i {
     font-size: 28px !important;
 }
+
 @media (min-width: 768px) {
     .WeatherPage {
         margin-top: 2.6rem !important;

@@ -106,7 +106,7 @@ const WeatherPage = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <Row>
+                            <Row >
                                 {getDailyForecast(forecastData).map((forecast, index) => (
                                     <Col key={index} className="forecast-day">
                                         <h4 className='date'>{forecast.date}</h4>
