@@ -1,0 +1,64 @@
+.leaflet-container {
+    height: 40vh !important;
+}
+
+.formSubmit {
+    display: flex;
+    align-items: center;
+}
+
+.submit_btn {
+    margin-top: 30px !important;
+
+    .btns {
+        border-radius: 10px !important;
+        background: #495094 !important;
+        color: #FFF !important;
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 600 !important;
+        line-height: normal;
+        border: none ! important;
+    }
+}
+
+.correct {
+    background: #495094 !important;
+    color: #FFF !important;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    border: none ! important;
+    display: flex;
+    align-items: center;
+}
+
+.wrong {
+    color: #495094 !important;
+    background: #dadcf7 !important;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    border: none ! important;
+    display: flex;
+    align-items: center;
+}
+
+h1 {
+    font-size: 70px !important;
+    font-weight: 600 !important;
+    background-image: linear-gradient(to left, #553c9a, #b393d3) !important;
+    color: transparent !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+}
+.recentSearch{
+    border-radius: 10px !important;
+    color: #495094 !important;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    line-height: normal;
+    border: none ! important;
+    background: #dadcf7 !important;
+}
