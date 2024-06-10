@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MapWrapper from '../components/Map/MapWrapper';
 import { Container, Row, Col, Form, Button, ToggleButtonGroup, ToggleButton, Alert } from 'react-bootstrap';
 import '../styles/HomePage.css';
+import axios from 'axios';
 
 const HomePage = () => {
     const [location, setLocation] = useState({ lat: 26.1158, lon: 91.7086, zoom: 10 });
@@ -39,23 +40,20 @@ const HomePage = () => {
         console.log(updatedSearches);
         localStorage.setItem('recentSearches', JSON.stringify(updatedSearches.slice(0, 3)));
     }
-    const searchByCity = (e) => {
+    const searchByCity = async (e) => {
         e.preventDefault();
         const city = e.target.elements.city.value;
-        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=597019841e8a32229b4eaaccde27015a`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    const lat = data[0].lat;
-                    const lon = data[0].lon;
-                    updateRecentSearch(lat, lon);
-                    navigate(`/weather?lat=${lat}&lon=${lon}&unit=${unit}`);
-                } else {
-                    setError('City not found');
-                }
-            })
-            .catch(error => console.log(error));
+        const response = await axios.get(`https://api.openweathermap.org/geo/1.0/direct`, {
+            params: {
+                q: city,
+                limit: 5,
+                appid: "597019841e8a32229b4eaaccde27015a"
+            }
+        });
+        const lat = response.data[0].lat;
+        const lon = response.data[0].lon;
+        updateRecentSearch(lat, lon);
+        navigate(`/weather?lat=${lat}&lon=${lon}&unit=${unit}`);
     }
     return (
         <Container className="HomePage">
@@ -71,7 +69,7 @@ const HomePage = () => {
                             <Col md={3}>
                                 <Form.Label>Units</Form.Label>
                                 <ToggleButtonGroup type="radio" name="units" defaultValue={unit} onChange={setUnit}>
-                                    <ToggleButton  className={unit === 'metric' ? 'correct' : 'wrong'} id="tbg-radio-1" value={'metric'}>
+                                    <ToggleButton className={unit === 'metric' ? 'correct' : 'wrong'} id="tbg-radio-1" value={'metric'}>
                                         Celsius
                                     </ToggleButton>
                                     <ToggleButton className={unit === 'imperial' ? 'correct' : 'wrong'} id="tbg-radio-2" value={'imperial'}>
