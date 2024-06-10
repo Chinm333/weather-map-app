@@ -13,6 +13,21 @@ const HomePage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                setLocation({
+                  lat: position.coords.latitude,
+                  lon: position.coords.longitude,
+                  zoom: 10,
+                });
+              },
+              (error) => {
+                console.error('Error fetching geolocation:', error);
+                setLocation({ lat: 26.1158, lon: 91.7086, zoom: 10 });
+              }
+            );
+          }
         const storedSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
         setRecentSearches(storedSearches);
     }, []);
@@ -80,13 +95,21 @@ const HomePage = () => {
                             <Col md={3}>
                                 <Form.Group controlId="lat">
                                     <Form.Label>Latitude</Form.Label>
-                                    <Form.Control type="number" name="lat" step="0.01" defaultValue={location.lat} required />
+                                    <Form.Control 
+                                    type="number" name="lat" step="0.01" 
+                                    value={location.lat}
+                                    onChange={(e) => setLocation({ ...location, lat: e.target.value })}
+                                    required />
                                 </Form.Group>
                             </Col>
                             <Col md={3}>
                                 <Form.Group controlId="lon">
                                     <Form.Label>Longitude</Form.Label>
-                                    <Form.Control type="number" name="lon" step="0.01" defaultValue={location.lon} required />
+                                    <Form.Control 
+                                    type="number" name="lon" step="0.01" 
+                                    value={location.lon}
+                                    onChange={(e) => setLocation({ ...location, lon: e.target.value })}
+                                    required />
                                 </Form.Group>
                             </Col>
                             <Col md={3} className="d-flex align-items-end submit_btn">
