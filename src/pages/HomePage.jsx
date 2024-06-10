@@ -39,6 +39,24 @@ const HomePage = () => {
         console.log(updatedSearches);
         localStorage.setItem('recentSearches', JSON.stringify(updatedSearches.slice(0, 3)));
     }
+    const searchByCity = (e) => {
+        e.preventDefault();
+        const city = e.target.elements.city.value;
+        let url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=597019841e8a32229b4eaaccde27015a`;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const lat = data[0].lat;
+                    const lon = data[0].lon;
+                    updateRecentSearch(lat, lon);
+                    navigate(`/weather?lat=${lat}&lon=${lon}&unit=${unit}`);
+                } else {
+                    setError('City not found');
+                }
+            })
+            .catch(error => console.log(error));
+    }
     return (
         <Container className="HomePage">
             <Row className="my-4">
@@ -51,6 +69,17 @@ const HomePage = () => {
                     <Form onSubmit={handleSubmit}>
                         <Row className='formSubmit'>
                             <Col md={3}>
+                                <Form.Label>Units</Form.Label>
+                                <ToggleButtonGroup type="radio" name="units" defaultValue={unit} onChange={setUnit}>
+                                    <ToggleButton  className={unit === 'metric' ? 'correct' : 'wrong'} id="tbg-radio-1" value={'metric'}>
+                                        Celsius
+                                    </ToggleButton>
+                                    <ToggleButton className={unit === 'imperial' ? 'correct' : 'wrong'} id="tbg-radio-2" value={'imperial'}>
+                                        Fahrenheit
+                                    </ToggleButton>
+                                </ToggleButtonGroup>
+                            </Col>
+                            <Col md={3}>
                                 <Form.Group controlId="lat">
                                     <Form.Label>Latitude</Form.Label>
                                     <Form.Control type="number" name="lat" step="0.01" defaultValue={location.lat} required />
@@ -62,24 +91,26 @@ const HomePage = () => {
                                     <Form.Control type="number" name="lon" step="0.01" defaultValue={location.lon} required />
                                 </Form.Group>
                             </Col>
-                            <Col md={3}>
-                                <Form.Label>Units</Form.Label>
-                                <ToggleButtonGroup type="radio" name="units" defaultValue={unit} onChange={setUnit}>
-                                    <ToggleButton className='correct' id="tbg-radio-1" value={'metric'}>
-                                        Celsius
-                                    </ToggleButton>
-                                    <ToggleButton className='wrong' id="tbg-radio-2" value={'imperial'}>
-                                        Fahrenheit
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </Col>
                             <Col md={3} className="d-flex align-items-end submit_btn">
-                                <Button  type="submit" className="w-100 btns">Get Weather</Button>
+                                <Button type="submit" className="w-100 btns">Get Weather</Button>
                             </Col>
                         </Row>
                     </Form>
                     {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
                 </Col>
+            </Row>
+            <Row>
+                <Form onSubmit={searchByCity} className='citySearch'>
+                    <Col md={3} className='cityLabel'>
+                        <Form.Group controlId="city">
+                            <Form.Label>Search city</Form.Label>
+                            <Form.Control type="text" name="city" required />
+                        </Form.Group>
+                    </Col>
+                    <Col md={3} className="d-flex align-items-end submit_btn">
+                        <Button type="submit" className="w-100 btns">Get Weather by City</Button>
+                    </Col>
+                </Form>
             </Row>
             <Row className="mb-4">
                 <Col>
